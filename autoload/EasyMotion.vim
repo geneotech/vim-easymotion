@@ -1511,6 +1511,12 @@ function! s:EasyMotion(regexp, direction, visualmode, is_inclusive, ...) " {{{
             " Jump to destination
             keepjumps call cursor(coords[0], coords[1])
 
+            if g:easymotion_paste_at_origin == 1
+                exe "normal ye\<C-o>a\<C-r>\""
+                call feedkeys("a")
+                let g:easymotion_paste_at_origin=0
+            endif
+
             " To avoid side effect of overwriting buffer {{{
             " for tpope/vim-repeat
             " See: :h b:changedtick
